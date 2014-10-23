@@ -130,7 +130,7 @@ handle_call({next, Timeout}, _From, State) ->
 	end;
 handle_call({rest, Limit, Timeout}, _From, State) ->
 	case rest_i(State, Limit, Timeout) of
-		{Reply, #state{cursor = 0} = UpdatedState} ->
+		{Reply, #state{cursor = 0, batch = []} = UpdatedState} ->
 			{stop, normal, Reply, UpdatedState};
 		{Reply, UpdatedState} ->
 			{reply, Reply, UpdatedState}
